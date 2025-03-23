@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Note App 2</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="note_text">Note Text</string>
+    <string name="date">Date</string>
+    <string name="note_name">Note Name</string>
+    <string name="save">Save</string>
+    <string name="note_date">Date</string>
+    <string name="default_note_name">New note</string>
+</resources>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:startDestination="@id/noteListFragment">
+
+    <fragment
+        android:id="@+id/noteListFragment"
+        android:name="dev.androidbroadcast.noteapp2.fragments.NoteListFragment"
+        android:label="List notes">
+        <action
+            android:id="@+id/action_noteListFragment_to_noteDetailFragment"
+            app:destination="@id/noteDetailFragment" />
+        <action
+            android:id="@+id/action_noteListFragment_to_noteEditFragment"
+            app:destination="@id/noteEditFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/noteDetailFragment"
+        android:name="dev.androidbroadcast.noteapp2.fragments.NoteDetailFragment"
+        android:label="Note detail">
+        <argument
+            android:name="noteId"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <action
+            android:id="@+id/action_noteDetailFragment_to_noteEditFragment"
+            app:destination="@id/noteEditFragment" />
+        <action
+            android:id="@+id/action_noteDetailFragment_to_noteListFragment"
+            app:destination="@id/noteListFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/noteEditFragment"
+        android:name="dev.androidbroadcast.noteapp2.fragmentsi.NoteEditFragment"
+        android:label="Edit note">
+        <argument
+            android:name="noteId"
+            app:argType="integer"
+            android:defaultValue="-1" />
+        <action
+            android:id="@+id/action_noteEditFragment_to_noteListFragment"
+            app:destination="@id/noteListFragment" />
+    </fragment>
+</navigation>
