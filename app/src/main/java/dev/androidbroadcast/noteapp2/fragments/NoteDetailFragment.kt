@@ -41,9 +41,15 @@ class NoteDetailFragment : Fragment() {
         }
 
         binding.btnDelete.setOnClickListener {
-            viewModel.getNoteById(args.noteId).value?.let { note ->
-                viewModel.delete(note)
-                findNavController().navigate(NoteDetailFragmentDirections.actionNoteDetailFragmentToNoteListFragment())
+            val noteId = arguments?.getInt("noteId", -1)
+            if (noteId != -1) {
+                viewModel.notes.observe(viewLifecycleOwner) { notes ->
+                    val noteToDelete = notes.find { it.id == noteId }
+                    noteToDelete?.let {
+                        viewModel.delete(it)
+                        findNavController().popBackStack()
+                    }
+                }
             }
         }
     }

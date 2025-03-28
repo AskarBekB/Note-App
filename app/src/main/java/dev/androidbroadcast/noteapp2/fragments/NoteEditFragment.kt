@@ -49,29 +49,21 @@ class NoteEditFragment : Fragment() {
             val currentTime = System.currentTimeMillis()
 
             if (args.noteId != -1) {
-                // Режим редактирования (меняем только описание)
-                viewModel.getNoteById(args.noteId).value?.let { note ->
-                    val updatedNote = note.copy(date = currentTime, text = noteText)
-                    viewModel.update(updatedNote)
+                viewModel.getNoteById(args.noteId).observe(viewLifecycleOwner) { note ->
+                    note?.let {
+                        val updatedNote = it.copy(date = currentTime, text = noteText)
+                        viewModel.update(updatedNote)
+                        findNavController().navigateUp()
+                    }
                 }
             } else {
-                // Режим создания (имя + текст)
                 val newNote = Note(
                     name = noteName.ifBlank { getString(R.string.default_note_name) },
                     date = currentTime,
                     text = noteText
                 )
                 viewModel.insert(newNote)
-            }
-            findNavController().navigateUp()
-        }
-
-        binding.btnDelete.setOnClickListener {
-            if (args.noteId != -1) {
-                viewModel.getNoteById(args.noteId).value?.let { note ->
-                    viewModel.delete(note)
-                    findNavController().navigateUp()
-                }
+                findNavController().navigateUp()
             }
         }
     }
